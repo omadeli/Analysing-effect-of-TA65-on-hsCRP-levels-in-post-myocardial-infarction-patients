@@ -1,13 +1,13 @@
-# Analysing-effect-of-TA65-on-hsCRP-levels-in-post-myocardial-infarction-patients
+# Analysing effect of TA65 on High-Sensitivity C-reative protien levels in post myocardial infarction patients
 
 # PROBLEM STATEMENT
-The dataset used is from a clinical trial at the Newcastle Clinical Trials where a double-blinded randomised controlled pilot trial evaluated the use of TA-65 to reduce cell aging in patients following Myocardial Infarction. There were 90 patients (45 Male, 45 Female) all aged over 65. In the trial, 45 random patients were given the placebo while the others were given TA-65. Data collection was performed over a 12-month period, with regular follow-ups to monitor changes in immune cell counts and hsCRP levels. The outcome of the trial High-sensitivity C-reactive protein (hsCRP) levels were recorded at baseline, 6 months, and 12 months. The task at hand is to model this data using a Linear Mixed Effect Model in other study the effect at 6 months and 12 months
+The dataset used is from a clinical trial at the Newcastle Clinical Trials where a double-blinded randomised controlled pilot trial evaluated the use of TA-65 to reduce cell aging in patients following Myocardial Infarction. There were 90 patients (45 Male, 45 Female) all aged over 65. In the trial, 45 random patients were given the placebo while the others were given TA-65(an oral telomerase activator). Data collection was performed over a 12-month period, with regular follow-ups to monitor changes in immune cell counts and hsCRP levels. The outcome of the trial, High-sensitivity C-reactive protein (hsCRP) levels were recorded at baseline, 6 months, and 12 months. The task at hand is to model this data using a Linear Mixed Effect Model in other study the effect of TA65 at 6 months and 12 months
 
 
 # KEY INSIGHTS TO INFORM DECISION MAKING
-* Both the TA65 and placebo groups experienced significant reductions in hsCRP levels over time, with decreases of approximately 69.94% at 6 months and 72.57% at 12 months compared to baseline(when patient first arrived)
-* The statistical model showed a statistically insignificant effect of -6.54% for the TA65 group, meaning that patients who took TA65 had 6.54% lower hsCRP levels than patients who did not take TA65 but this could be due to luck as the pvalue was 0.54
+* Both the TA65 and placebo groups experienced significant reductions in hsCRP levels over time, with decreases of approximately 70% at 6 months and 73.57% at 12 months compared to baseline(when patient first arrived)
 * At 6 months, people in the TA65 group had results that were about 5.5% higher compared to the placebo group, while at 12 months, their results were about 8% lower compared to the placebo group. However, these differences aren’t meaningful because the data suggests they could simply be due to chance. This shows how important it is to consider both the size of the effect and whether it’s statistically reliable when evaluating a treatment’s impact.
+* The statistical model showed a statistically insignificant effect of -6.54% for the TA65 group, meaning that patients who took TA65 had 6.54% lower hsCRP levels than patients who did not take TA65 but this could be due to luck as the pvalue was 0.54.
 
 # DATA CLEANING AND PREPARATION
 To facilitate data manipulation and analysis, several R packages were installed and loaded, including dplyr and tidyr for data wrangling, lme4 and lmerTest for fitting linear mixed-effects models, VIM and mice for missing data visualisation and imputation, ggplot2 for data visualisation, broom and broom.mixed for tidy output of model results.
@@ -60,4 +60,36 @@ The lmer package from R. Linear mixed models were fitted using the lmer() functi
 In our case, the response variable is the log-transformed hsCRP levels (hscrp_log), the fixed effects include treatment group (rand_group), time (timef), and other covariates such as gender, ACS type (acs_type), and CD8 proportion (cd8_prop), while the random effects account for the variability among individual subjects (subject_id).
 A Linear Mixed Effect Model was fitted with interaction terms specified for the randomised group and time.
 # RESULT AND EVALUATION
-The results revealed a significant reductions in hsCRP levels at both 6 months (Estimate: -1.20233, p < 0.001) and 12 months (Estimate: -1.29079, p < 0.001) as expected. The interaction terms for the TA65 treatment, however, did not reach significance (6 months: Estimate: 0.05380, p =0.862; 12 months: Estimate: -0.08322, p = 0.788). The TA65 treatment effect’s estimate of -0.06766 in suggests a 6.6% decrease in hsCRP levels compared to the placebo group, though this was not statistically significant (p = 0.758).
+This study examined the effect of the TA65 treatment on hsCRP levels, a biomarker of inflammation, over time compared to a placebo group. A linear mixed-effects model was employed to account for repeated measurements and individual variability. The dependent variable, hsCRP, was log-transformed to stabilize variance, allowing the effects to be interpreted as relative changes.
+
+The analysis revealed that hsCRP levels significantly decreased over time in both the placebo and TA65 groups. At six months, hsCRP levels dropped by approximately 70% compared to baseline (
+𝑝
+<
+0.001
+p<0.001). By 12 months, the reduction reached approximately 73% (
+𝑝
+<
+0.001
+p<0.001). These findings indicate a substantial improvement in inflammatory profiles over time, regardless of treatment group.
+
+At baseline, hsCRP levels in the TA65 group were about 6.5% lower than those in the placebo group. However, this difference was not statistically significant (
+𝑝
+=
+0.758
+p=0.758). Over time, the interaction between treatment group and time showed no meaningful differences in the pattern of hsCRP reduction. At six months, the TA65 group’s hsCRP levels were approximately 5.5% higher than those in the placebo group, but this difference was not statistically significant (
+𝑝
+=
+0.862
+p=0.862). Similarly, at 12 months, the TA65 group’s hsCRP levels were about 8% higher than the placebo group, with no statistical significance (
+𝑝
+=
+0.788
+p=0.788). These results suggest that the TA65 treatment did not significantly alter the natural reduction in hsCRP levels observed in both groups over time.
+
+The model also revealed slight variability in baseline hsCRP levels across individuals, as indicated by the random effects. However, the majority of variability in the data was attributed to residual factors rather than differences between individuals.
+
+These findings carry important implications. While hsCRP levels decreased substantially over time, this reduction appears to reflect general lifestyle or study conditions rather than any specific effect of TA65. The lack of a statistically significant effect of TA65 on hsCRP levels suggests that the treatment may not directly influence inflammation as measured by this biomarker. Any differences observed between the TA65 and placebo groups were small and likely due to random variation.
+
+The analysis has several strengths, including the use of a linear mixed-effects model, which accounts for repeated measurements and individual differences, providing a nuanced understanding of changes over time. However, the study is not without limitations. It focused solely on hsCRP as a marker of inflammation, and additional biomarkers or clinical outcomes might offer a more comprehensive assessment of TA65’s effects. Additionally, the sample size may have limited the ability to detect smaller but potentially meaningful differences.
+
+In conclusion, while hsCRP levels significantly decreased over time, the TA65 treatment did not demonstrate any additional benefits compared to the placebo. Future research should explore larger samples, longer follow-up periods, and alternative markers of inflammation to fully assess the potential effects of TA65 on inflammation and other clinical outcomes.
